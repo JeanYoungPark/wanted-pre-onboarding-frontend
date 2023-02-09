@@ -1,11 +1,11 @@
 import React from 'react'
-import Form from './SignForm'
+import Form from '../components/SignForm'
 
 
 export default function SignIn() {
   return (
     <div>
-      <Form />
+      <Form type='signin'/>
     </div>
   )
 }

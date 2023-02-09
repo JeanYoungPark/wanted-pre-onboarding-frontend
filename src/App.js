@@ -2,9 +2,9 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
-import SignUp from './components/SignUp';
-import SignIn from './components/SignIn';
-import Todo from './components/Todo';
+import SignUp from './pages/SignUpPage';
+import SignIn from './pages/SignInPage';
+import Todo from './pages/TodoPage';
 import NotFound from './components/NotFound';
 
 
