@@ -9,7 +9,7 @@ header a {color: #333; text-decoration: none; padding-left: 10px;}
 header a:hover {font-weight: 600;}
 
 /* sign form */
-.sign {position: fixed; top: 0; left: 0; width: 100%; height: 100%;}
+.sign {position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -999;}
 .sign .form {position: absolute; top: 50%; margin-top: -100px; display: flex; justify-content: center; width: 100%; height: 100px;}
 .sign .form input {padding: 5px; margin-bottom: 5px;}
 .sign .form .btn-wrap {display: flex; justify-content: space-between;}

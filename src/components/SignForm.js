@@ -9,11 +9,17 @@ export default function SignForm({type}) {
 
   // 하나라도 조건에 충족하지 않으면 버튼 비활성화
   useEffect(() => {
-    let regex = new RegExp('[a-z0-9]+@[a-z0-9]');
-    if(regex.test(email) && password.length >= 8){
-      setBtnState(false);
+    // 로그인 되어 있는 상태인지 확인
+    if(localStorage.getItem('access-token')){
+      navigate('/todo');
     }else{
-      setBtnState(true);
+      let regex = new RegExp('[a-z0-9]+@[a-z0-9]');
+
+      if(regex.test(email) && password.length >= 8){
+        setBtnState(false);
+      }else{
+        setBtnState(true);
+      } 
     }
   }, [email, password]);
 
