@@ -4,7 +4,7 @@ import Form from '../components/SignForm'
 
 export default function SignIn() {
   return (
-    <div>
+    <div className='sign'>
       <Form type='signin'/>
     </div>
   )

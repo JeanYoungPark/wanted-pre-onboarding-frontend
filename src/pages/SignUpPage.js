@@ -3,7 +3,7 @@ import Form from '../components/SignForm'
 
 export default function SignUp() {
   return (
-    <div>
+    <div className='sign'>
       <Form type='signup'/>
     </div>
   )
