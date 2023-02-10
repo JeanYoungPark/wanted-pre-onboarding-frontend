@@ -21,7 +21,7 @@ export default function SignForm({type}) {
         setBtnState(true);
       } 
     }
-  }, [email, password]);
+  }, [email, password, navigate]);
 
   // sign in , sign up 공통 form 요청
   const handleSubmit = async (e) => {
