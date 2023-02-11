@@ -42,7 +42,7 @@ export default function Todo() {
     <div className='todo'>
       <div>
         <TodoForm handleSubmit={handleSubmit} setTodo={setTodo}/>
-        <TodoLists handleChanged={handleChanged} todoList={todoList}/>
+        <TodoLists handleChanged={handleChanged} todoList={todoList} setTodoList={setTodoList}/>
       </div>
     </div>
   )

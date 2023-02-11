@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import TodoList from './TodoList'
 
-export default function TodoLists({handleChanged, todoList}) {
+export default function TodoLists({handleChanged, todoList, setTodoList}) {
   
   useEffect(()=>{
     handleChanged();
@@ -10,7 +10,7 @@ export default function TodoLists({handleChanged, todoList}) {
   return (
     <ul>
       {todoList.map((data)=>{
-        return <TodoList data={data}/>
+        return <TodoList data={data} handleChanged={handleChanged}/>
       })}
     </ul>
   )
