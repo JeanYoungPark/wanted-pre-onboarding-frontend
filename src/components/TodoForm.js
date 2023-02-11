@@ -1,16 +1,12 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
 export default function TodoForm({handleSubmit, setTodo}) {
   const navigate = useNavigate();
 
-  useEffect(()=>{
-    if(localStorage.getItem('access-token')){
-
-    }else{
-      navigate('/signin');
-    }
-  },[navigate]);
+  if(!localStorage.getItem('access-token')){
+    navigate('/signin');
+  }
 
   return (
     <div className='form' onSubmit={handleSubmit}>

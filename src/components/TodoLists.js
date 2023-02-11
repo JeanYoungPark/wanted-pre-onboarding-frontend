@@ -1,11 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import TodoList from './TodoList'
 
 export default function TodoLists({handleChanged, todoList}) {
   
-  useEffect(()=>{
-    handleChanged();
-  },[handleChanged])
+  handleChanged();
 
   return (
     <ul>
