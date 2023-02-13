@@ -5,7 +5,7 @@ export default function TodoLists({todoList, userToken, setChanged}) {
   return (
     <ul>
       {todoList.map((data)=>{
-        return <TodoList key={data.id} data={data} userToken={userToken} setChanged={setChanged}/>
+        return <TodoList key={data.id} data={data.todo} userToken={userToken} setChanged={setChanged}/>
       })}
     </ul>
   )

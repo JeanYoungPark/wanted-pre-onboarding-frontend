@@ -1,14 +1,9 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 
-export default function TodoList({data, userToken, setChanged}) {
-  const [todo, setTodo] = useState(data.todo);
-  const [modify, setModify] = useState(false);
-
-  const handleCancle = () => {
-    reload();
-    setModify(false);
-  }
+export default function TodoList({key, data, userToken, setChanged}) {
+  const [modifyMode, setModifyMode] = useState(false);
+  const [editedTitle, setEditedTitle] = useState(data);
 
   const handelDelete = async (e) => {
     if(window.confirm("삭제하시겠습니까?")){
@@ -22,47 +17,55 @@ export default function TodoList({data, userToken, setChanged}) {
       .then((res)=>{
         console.log(res);
         setChanged(true);
-        setModify(false)
+        setModifyMode(false)
       });
     }
   }
 
   const handleListSubmit = async (e) => {
     await axios({
-      url: `https://pre-onboarding-selection-task.shop/todos/${e.target.id}`,
+      url: `https://pre-onboarding-selection-task.shop/todos/${e.target.key}`,
       method: "PUT",
       headers : {
         "Authorization": `Bearer ${userToken}`,
         "Content-Type": "application/json"
       },
       data: {
-        todo : todo
+        todo : editedTitle
       }
     })
     .then((res)=>{
       console.log(res);
       setChanged(true);
-      setModify(false)
+      setModifyMode(false)
     });
   }
 
-  return (
-    <li>
-      <label>
-        <input type="checkbox"/>
-        <input type="text" data-testid="modify-input" value={todo} onChange={(e) => setTodo(e.target.value)} disabled={!modify}/>
-      </label>
-      {modify ? 
+  if(modifyMode){
+    return(
+      <li>
+        <label>
+          <input type="checkbox"/>
+          <input type="text" data-testid="modify-input" value={editedTitle} onChange={(e) => setEditedTitle(e.target.value)}/>
+        </label>
         <p className='btn'>
-          <button type="submit" data-testid="submit-button" onClick={(e) => handleListSubmit(e)}>제출</button>
-          <button data-testid="cancel-button" onClick={() => handleCancle()}>취소</button>
+          <button type="submit" data-testid="submit-button" key={key} onClick={(e) => handleListSubmit(e)}>제출</button>
+          <button data-testid="cancel-button" onClick={() => setModifyMode(false)}>취소</button>
         </p>
-      :
-        <p className="btn">
-          <button type="button" data-testid="modify-button" onClick={() => setModify(true)}>수정</button>
+      </li>
+    )
+  }else{
+    return(
+      <li>
+        <label>
+          <input type="checkbox"/>
+          <span>{data}</span>
+        </label>
+        <p className='btn'>
+          <button type="button" data-testid="modify-button" onClick={() => setModifyMode(true)}>수정</button>
           <button data-testid="delete-button" onClick={() => handelDelete()}>삭제</button>
         </p>
-      }
-    </li>
-  )
+      </li>
+    )
+  }
 }
