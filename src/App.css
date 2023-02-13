@@ -19,6 +19,8 @@ header a:hover {font-weight: 600;}
 /* todo form */
 .todo {display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px;}
 .todo .form form {display:flex; vertical-align: middle;}
-.todo .form input{padding: 5px; margin-right: 5px;}
+.todo .form input{width: 350px; padding: 5px; margin-right: 5px;}
 .todo ul li {display: flex; justify-content: space-between; margin-top: 10px;}
+.todo ul li input[type=text] {width:250px;padding:5px;}
+.todo ul li input:disabled {border:0; background: none; color:#333;}
 .todo ul li input {margin-right: 5px;}
