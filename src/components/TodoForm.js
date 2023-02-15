@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../api/axios';
 import React, {useState} from 'react'
 
 export default function TodoForm({userToken, setChanged}) {
@@ -7,7 +7,7 @@ export default function TodoForm({userToken, setChanged}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios({
-      url: "https://pre-onboarding-selection-task.shop/todos",
+      url: "/todos",
       method: "POST",
       headers : {
         "Authorization":`Bearer ${userToken}`,
@@ -20,6 +20,9 @@ export default function TodoForm({userToken, setChanged}) {
     .then((res)=>{
       setChanged(true);
       setTodo('');
+    })
+    .catch((error)=>{
+      alert(error.response.data.message);
     });
   }
 

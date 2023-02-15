@@ -4,7 +4,7 @@ import Form from '../components/SignForm'
 export default function SignUp() {
   return (
     <div className='sign'>
-      <Form type='signup'/>
+      <Form type='signup' userLocation='signup'/>
     </div>
   )
 }

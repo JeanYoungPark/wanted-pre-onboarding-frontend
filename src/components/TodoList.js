@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../api/axios';
 import React, { useState } from 'react'
 
 export default function TodoList({id, data, completed, userToken, setChanged}) {
@@ -9,7 +9,7 @@ export default function TodoList({id, data, completed, userToken, setChanged}) {
 
   const handleClick = async (e) => {
     await axios({
-      url: `https://pre-onboarding-selection-task.shop/todos/${id}`,
+      url: `/todos/${id}`,
       method: "PUT",
       headers : {
         "Authorization": `Bearer ${userToken}`,
@@ -30,7 +30,7 @@ export default function TodoList({id, data, completed, userToken, setChanged}) {
   const handelDelete = async (e) => {
     if(window.confirm("삭제하시겠습니까?")){
       await axios({
-        url: `https://pre-onboarding-selection-task.shop/todos/${id}`,
+        url: `/todos/${id}`,
         method: "DELETE",
         headers : {
           "Authorization": `Bearer ${userToken}`
@@ -45,7 +45,7 @@ export default function TodoList({id, data, completed, userToken, setChanged}) {
 
   const handleListSubmit = async (e) => {
     await axios({
-      url: `https://pre-onboarding-selection-task.shop/todos/${e.target.getAttribute('data-id')}`,
+      url: `/todos/${id}`,
       method: "PUT",
       headers : {
         "Authorization": `Bearer ${userToken}`,

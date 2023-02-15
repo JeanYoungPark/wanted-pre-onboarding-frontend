@@ -7,14 +7,14 @@ button {cursor: pointer;}
 header {display: flex; justify-content: flex-end; padding: 15px; background-color: #f0f0f0;}
 header a {color: #333; text-decoration: none; padding-left: 10px;}
 header a:hover {font-weight: 600;}
+header .on {font-weight: 600;}
 
 /* sign form */
 .sign {position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -999;}
 .sign .form {position: absolute; top: 50%; margin-top: -100px; display: flex; justify-content: center; width: 100%; height: 100px;}
 .sign .form input {padding: 5px; margin-bottom: 5px;}
 .sign .form .btn-wrap {display: flex; justify-content: space-between;}
-.sign .form .btn-wrap p {width: 90px;}
-.sign .form .btn-wrap p button {width: 100%;}
+.sign .form .btn-wrap button {width: 100%;}
 
 /* todo form */
 .todo {display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px;}
@@ -22,5 +22,4 @@ header a:hover {font-weight: 600;}
 .todo .form input{width: 350px; padding: 5px; margin-right: 5px;}
 .todo ul li {display: flex; justify-content: space-between; margin-top: 10px;}
 .todo ul li input[type=text] {width:250px;padding:5px;}
-.todo ul li input:disabled {border:0; background: none; color:#333;}
 .todo ul li input {margin-right: 5px;}

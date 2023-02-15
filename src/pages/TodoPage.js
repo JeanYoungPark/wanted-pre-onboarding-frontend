@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../api/axios';
 import React,{useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import TodoForm from '../components/TodoForm'
@@ -25,7 +25,7 @@ export default function Todo() {
 
   const handleChanged = async () => {
     await axios({
-      url: "https://pre-onboarding-selection-task.shop/todos",
+      url: "/todos",
       method: "GET",
       headers: {
         "Authorization": `Bearer ${userToken}`

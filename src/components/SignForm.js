@@ -1,8 +1,8 @@
-import axios from 'axios';
+import axios from '../api/axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-export default function SignForm({type}) {
+export default function SignForm({type, userLocation}) {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -28,11 +28,11 @@ export default function SignForm({type}) {
   }, [email, password]);
 
   // sign in , sign up 공통 form 요청
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, callback) => {
     e.preventDefault();
 
     await axios({
-      url: `https://pre-onboarding-selection-task.shop/auth/${type}`,
+      url: `/auth/${type}`,
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -43,30 +43,42 @@ export default function SignForm({type}) {
       }
     })
     .then((res) => {
-      if(res.status === 201){
-        navigate('/signin');
-      }else if(res.status === 200){
-        localStorage.setItem("access-token",res.data.access_token);
-        navigate('/todo');
-      }else{
-        alert("아이디 또는 비밀번호를 확인해주세요");
-      }
+      if(typeof(callback) === 'function') callback(res);
+    })
+    .catch((error) => {
+      alert(error.response.data.message);
     });
 
   }
 
-  return (
-    <div className='form'>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <p><input id="email" type="email" name="email" data-testid="email-input" placeholder='이메일을 입력해주세요.' onChange={e => setEmail(e.target.value)} required/></p>
-          <p><input id="password" type="password" name="password" minLength="8" data-testid="password-input" placeholder='비밀번호를 입력해주세요.' onChange={e => setPassword(e.target.value)} required/></p>
-        </div>
-        <div className='btn-wrap'>
-          <p><button type="submit" data-testid="signup-button" disabled={btnState}>회원가입</button></p>
-          <p><button type="submit" data-testid="signin-button" disabled={btnState}>로그인</button></p>
-        </div>
-      </form>
-    </div>
-  )
+  if(userLocation === 'signin'){
+    return (
+      <div className='form'>
+        <form onSubmit={(e) => handleSubmit(e, (res) => {
+          localStorage.setItem("access-token",res.data.access_token);
+          navigate('/todo');
+        })}>
+          <div>
+            <p><input id="email" type="email" name="email" data-testid="email-input" placeholder='이메일을 입력해주세요.' onChange={e => setEmail(e.target.value)} required/></p>
+            <p><input id="password" type="password" name="password" minLength="8" data-testid="password-input" placeholder='비밀번호를 입력해주세요.' onChange={e => setPassword(e.target.value)} required/></p>
+          </div>
+          <div className='btn-wrap'><button type="submit" data-testid="signin-button" disabled={btnState}>로그인</button></div>
+        </form>
+      </div>
+    )
+  }else{
+    return (
+      <div className='form'>
+        <form onSubmit={(e) => handleSubmit(e, (res) => {
+          navigate('/signin');
+        })}>
+          <div>
+            <p><input id="email" type="email" name="email" data-testid="email-input" placeholder='이메일을 입력해주세요.' onChange={e => setEmail(e.target.value)} required/></p>
+            <p><input id="password" type="password" name="password" minLength="8" data-testid="password-input" placeholder='비밀번호를 입력해주세요.' onChange={e => setPassword(e.target.value)} required/></p>
+          </div>
+          <div className='btn-wrap'><button type="submit" data-testid="signup-button" disabled={btnState}>회원가입</button></div>
+        </form>
+      </div>
+    )
+  }
 }

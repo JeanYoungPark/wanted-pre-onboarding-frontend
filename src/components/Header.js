@@ -1,26 +1,14 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 export default function Header() {
-  const [userToken, setUserToken] = useState(localStorage.getItem("access-token"));
+  const location = useLocation();
+  const [userLocation, setUserLocation] = useState(location.pathname);
 
-  const handleLogout = () => {
-    localStorage.removeItem("access-token");
-    setUserToken('');
-  }
-
-  if(userToken){
-    return (
-      <header>
-        <span onClick={handleLogout}>logout</span>
-      </header>
-    )
-  }else{
-    return (
-      <header>
-          <Link to="/signup">signup</Link>
-          <Link to="/signin">signin</Link>
-      </header>
-    )
-  }
+  return (
+    <header>
+        <Link to="/signup" className={userLocation === 'signup' ? 'on' : ''} onClick={() => setUserLocation('signup')}>signup</Link>
+        <Link to="/signin"  className={userLocation === 'signin' ? 'on' : ''} onClick={() => setUserLocation('signin')}>signin</Link>
+    </header>
+  )
 }
