@@ -7,6 +7,7 @@ export default function TodoList({id, data, completed, userToken, setChanged}) {
   const [editedTitle, setEditedTitle] = useState(data);
   const [isCompleted, setIsCompleted] = useState(completed);
 
+  // 체크박스 클릭시 활성화 또는 비활성화 설정
   const handleClick = async (e) => {
     await axios({
       url: `/todos/${id}`,
@@ -27,6 +28,7 @@ export default function TodoList({id, data, completed, userToken, setChanged}) {
     setIsCompleted(!isCompleted);
   }
 
+  // 삭제
   const handelDelete = async (e) => {
     if(window.confirm("삭제하시겠습니까?")){
       await axios({
@@ -43,6 +45,7 @@ export default function TodoList({id, data, completed, userToken, setChanged}) {
     }
   }
 
+  // 수정
   const handleListSubmit = async (e) => {
     await axios({
       url: `/todos/${id}`,

@@ -4,6 +4,7 @@ import React, {useState} from 'react'
 export default function TodoForm({userToken, setChanged}) {
   const [todo, setTodo] = useState('');
 
+  // 최초 리스트 저장
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios({
