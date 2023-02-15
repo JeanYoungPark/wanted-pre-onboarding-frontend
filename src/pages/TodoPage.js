@@ -34,6 +34,9 @@ export default function Todo() {
     .then((res)=>{
       setTodoList(res.data);
       setChanged(false);
+    })
+    .catch((error)=> {
+      alert(error.response.data.message);
     });
   }
 

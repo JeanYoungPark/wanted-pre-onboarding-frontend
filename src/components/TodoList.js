@@ -24,6 +24,9 @@ export default function TodoList({id, data, completed, userToken, setChanged}) {
     .then((res)=>{
       setChanged(true);
       setModifyMode(false)
+    })
+    .catch((error)=>{
+      alert(error.response.data.message);
     });
     setIsCompleted(!isCompleted);
   }
@@ -41,6 +44,9 @@ export default function TodoList({id, data, completed, userToken, setChanged}) {
       .then((res)=>{
         setChanged(true);
         setModifyMode(false)
+      })
+      .catch((error)=>{
+        alert(error.response.data.message);
       });
     }
   }
@@ -62,6 +68,9 @@ export default function TodoList({id, data, completed, userToken, setChanged}) {
     .then((res)=>{
       setChanged(true);
       setModifyMode(false)
+    })
+    .catch((error)=>{
+      alert(error.response.data.message);
     });
   }
 
