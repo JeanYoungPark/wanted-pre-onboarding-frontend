@@ -36,7 +36,7 @@ export default function Todo() {
       setChanged(false);
     })
     .catch((error)=> {
-      alert(error.response.data.message);
+      alert("잘못된 접근입니다.");
     });
   }
 
